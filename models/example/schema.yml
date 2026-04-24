@@ -1,0 +1,52 @@
+
+version: 2
+
+models:
+  - name: dim_customers
+    description: "A starter dbt model"
+    columns:
+      - name: CUSTOMER_ID
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: FIRST_NAME
+        description: "Customer first name"
+        data_tests:
+          - not_null
+      - name: FIRST_ORDER_DATE
+        description: "Customer first order date"
+        data_tests:
+          - not_null
+      - name: LIFETIME_VALUE
+        description: "Customer information lifetime date"
+        # data_tests:
+        #   - not_null
+      - name: MOST_RECENT_ORDER_DATE
+        description: "Customer last operation date"
+        data_tests:
+          - not_null
+      - name: NUMBER_OF_ORDER
+        description: "Customer order number"
+        data_tests:
+          - not_null
+  - name: fct_orders
+    description: "A starter dbt model"
+    columns:
+      - name: amount
+        description: "Amount of transaction"
+        data_tests:
+          - not_null
+      - name: customer_id
+        description: "Customer identification number"
+        data_tests:
+          - not_null
+      - name: order_date
+        description: "Order date"
+        data_tests:
+          - not_null
+      - name: order_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_nDBull
