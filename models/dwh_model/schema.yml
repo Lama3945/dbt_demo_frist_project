@@ -1,0 +1,102 @@
+
+version: 2
+
+sources:
+  - name: jaffle_shop
+    database: raw
+    tables:
+      - name: orders 
+      - name: customers 
+  - name: stripe
+    tables:
+      - name: payments
+models:
+  - name: dim_client
+    description: "Client information table"
+    columns:
+      - name: client_ID
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: FIRST_NAME
+        description: "Client first name"
+        data_tests:
+          - not_null
+      - name: LAST_NAME
+        description: "Client last name"
+        data_tests:
+          - not_null
+      - name: insert_date
+        description: "Technical insertion date"
+        data_tests:
+          - not_null
+  - name: dim_payment_method
+    description: "Payment method table"
+    columns:
+      - name: ID_PAYMENT_METHOD
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: LB_PAYMENT_METHOD
+        description: "Payment method libelled"
+        data_tests:
+          - not_null
+      - name: DT_INSERT
+        description: "Technical insertion date"
+        data_tests:
+          - not_null
+  - name: evt_orders
+    description: "Order event table"
+    columns:
+      - name: ID_ORDER
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: DT_ORDER
+        description: "Order date"
+        data_tests:
+          - not_null
+      - name: LB_STATUS
+        description: "Order status"
+        data_tests:
+          - not_null
+      - name: DT_INSERT
+        description: "Technical insertion date"
+        data_tests:
+          - not_null
+  - name: fait_payment
+    description: "payment fact table"
+    columns:
+      - name: ID_PAYMENT
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: ID_ORDER
+        description: "The order unique identification"
+        data_tests:
+          - unique
+          - not_null
+      - name: ID_PAYMENT_METHOD
+        description: "Payment method unique identification"
+        data_tests:
+          - not_null
+      - name: LB_STATUS
+        description: "Payment status"
+        data_tests:
+          - not_null
+      - name: MT_PAYMENT
+        description: "Payment amount"
+        data_tests:
+          - not_null
+      - name: DT_PAYMENT
+        description: "Payment date"
+        data_tests:
+          - not_null
+      - name: DT_INSERT
+        description: "Technical insertion date"
+        data_tests:
+          - not_null

@@ -33,4 +33,8 @@ models:
   dbt_demo_frist_project:
     # Config indicated by + and applies to all files under models/example/
     example:
-      +materialized: view
+      +enabled: False
+    dtm_model:
+      +materialized: table
+    dwh_model:
+      +materialized: table

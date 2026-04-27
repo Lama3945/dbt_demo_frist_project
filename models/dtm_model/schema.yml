@@ -1,0 +1,40 @@
+
+version: 2
+
+models:
+  - name: client_loyalty
+    description: "A starter dbt model"
+    columns:
+      - name: ID_CLIENT
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: LB_FIRST_NAME
+        description: "Customer first name"
+        data_tests:
+          - not_null
+      - name: LB_LAST_NAME
+        description: "Customer last name"
+        data_tests:
+          - not_null
+      - name: DT_FIRST_ORDER_DATE
+        description: "Customer first order date"
+        data_tests:
+          - not_null
+      - name: DT_LAST_ORDER_DATE
+        description: "Customer last order date"
+        data_tests:
+          - not_null
+      - name: NUMBER_OF_ORDER
+        description: "Customer order number"
+        data_tests:
+          - not_null
+      - name: MT_TOTAL_PAYMENT
+        description: "Customers total amount"
+        data_tests:
+          - not_null
+      - name: MT_LOYALTY
+        description: "Customers total amount"
+        data_tests:
+          - not_null
