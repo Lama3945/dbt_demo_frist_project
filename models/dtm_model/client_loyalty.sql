@@ -9,6 +9,16 @@
 
 {{ config(materialized='table') }}
 
+
+with last_order as (
+    SELECT id_order,
+           id_user
+    FROM {{ ref('evt_orders')}} ord
+    QUALIFY ROW_NUMBER() OVER(PARTITION BY ord.id_order 
+            ORDER BY ord.dt_order DESC
+           )=1
+)
+
 select client.id_client,
        client.lb_first_name,
        client.lb_last_name,
@@ -17,8 +27,11 @@ select client.id_client,
        count(distinct payment.id_order) AS NUMBER_OR_ORDER,
        sum(payment.mt_payment)          AS MT_TOTAL_PAYMENT
 from {{ ref('dim_client')}} client
+left join last_order 
+ON client.id_client = last_order.id_user
 left join {{ ref('fait_payment') }} payment
-ON client.id_client = payment.id_client
+ON last_order.id_order = payment.id_order
+group by all
 
 /*
     Uncomment the line below to remove records with null `id` values

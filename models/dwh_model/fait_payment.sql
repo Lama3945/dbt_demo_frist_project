@@ -8,15 +8,15 @@
 
 {{ config(materialized='table') }}
 
-select src.id                           AS ID_PAYMENT,
-       src.orderid                      AS ID_ORDER,
-       ifnull(dim.id_payment_method,-1) AS ID_PAYMENT_METHOD,
-       src.amount                       AS MT_PAYMENT,
-       src.created                      AS DT_PAYMENT,
-       src.status                       AS LB_STATUS,
-from {{ source('stripe', 'payments') }} src
-left {{ ref('dim_payment_method') }}  dim
-ON ifnull(src.paymentmethod,'a') = ifnull(dim.lb_payment_method,'b')
+select src.ID_PAYMENT,
+       src.ID_ORDER,
+       dim.hash_payment_method,
+       src.MT_PAYMENT,
+       src.DT_PAYMENT,
+       src.LB_STATUS,
+from {{ ref('stg_stripe__payment') }} src
+left join {{ ref('dim_payment_method') }}  dim
+ON src.hash_payment_method = dim.hash_payment_method
 
 /*
     Uncomment the line below to remove records with null `id` values

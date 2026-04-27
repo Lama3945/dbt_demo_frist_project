@@ -8,10 +8,11 @@
 
 {{ config(materialized='table') }}
 
-select DISTINCT ID         AS ID_ORDER,
-                ORDER_DATE AS DT_ORDER,
-                STATUS     AS LB_STATUS
-from {{ source('jaffle_shop', 'orders') }}
+select ID_ORDER,
+       ID_USER,
+       DT_ORDER,
+       LB_STATUS
+from {{ ref('stg_jaffle_shop__orders') }}
 
 /*
     Uncomment the line below to remove records with null `id` values

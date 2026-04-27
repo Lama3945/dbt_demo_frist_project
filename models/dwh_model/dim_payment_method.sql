@@ -9,8 +9,11 @@
 
 {{ config(materialized='table') }}
 
-select distinct paymentmethod AS LB_PAYMENT_METHOD
-from {{ source('stripe', 'payments') }}
+select LB_PAYMENT_METHOD,
+       HASH_PAYMENT_METHOD
+from {{ ref('stg_stripe__payment') }}
+QUALIFY ROW_NUMBER() OVER(PARTITION BY HASH_PAYMENT_METHOD
+ORDER BY LB_PAYMENT_METHOD DESC)=1
 
 /*
     Uncomment the line below to remove records with null `id` values
