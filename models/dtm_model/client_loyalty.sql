@@ -24,8 +24,9 @@ select client.id_client,
        client.lb_last_name,
        max(payment.dt_payment)          AS DT_LAST_PAYMENT,
        min(payment.dt_payment)          AS DT_FIRST_PAYMENT,
-       count(distinct payment.id_order) AS NUMBER_OR_ORDER,
-       sum(payment.mt_payment)          AS MT_TOTAL_PAYMENT
+       count(distinct payment.id_order) AS NUMBER_OF_ORDER,
+       sum(payment.mt_payment)          AS MT_TOTAL_PAYMENT,
+       0                                AS MT_LOYALTY
 from {{ ref('dim_client')}} client
 left join last_order 
 ON client.id_client = last_order.id_user

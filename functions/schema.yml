@@ -1,0 +1,14 @@
+functions:
+  - name: is_positive_integer       # required
+    description: My UDF that returns 1 if a string represents a naked positive integer (like "10", "+8" is not allowed). # optional
+    config:
+      schema: dbt_schema_dev
+      database: dbt_dev
+      volatility: deterministic
+    arguments:                  
+      - name: a_string          
+        data_type: string       
+        description: The string that I want to check if it's representing a positive integer (like "10") 
+        default_value: "1"       
+    returns:                    
+      data_type: integer        

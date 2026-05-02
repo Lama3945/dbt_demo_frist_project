@@ -18,14 +18,22 @@ models:
         description: "Customer last name"
         data_tests:
           - not_null
-      - name: DT_FIRST_ORDER_DATE
+      - name: DT_FIRST_PAYMENT
         description: "Customer first order date"
         data_tests:
-          - not_null
-      - name: DT_LAST_ORDER_DATE
+          - not_null:
+              config:
+                severity: error
+                error_if: ">50"
+                warn_if: ">25"
+      - name: DT_LAST_PAYMENT
         description: "Customer last order date"
         data_tests:
-          - not_null
+          - not_null:
+              config:
+                severity: error
+                error_if: ">50"
+                warn_if: ">25"
       - name: NUMBER_OF_ORDER
         description: "Customer order number"
         data_tests:
@@ -33,7 +41,13 @@ models:
       - name: MT_TOTAL_PAYMENT
         description: "Customers total amount"
         data_tests:
-          - not_null
+          - _pourcentage_donnes_corrompues:
+              arguments:
+                seuil_montant_valide : 1000
+                config:
+                  severity: error
+                  error_if: ">50"
+                  warn_if: ">25"
       - name: MT_LOYALTY
         description: "Customers total amount"
         data_tests:

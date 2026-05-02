@@ -17,6 +17,7 @@ test-paths: ["tests"]
 seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
+function-paths: ["functions"]
 
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
@@ -33,7 +34,6 @@ models:
   dbt_demo_frist_project:
     # Config indicated by + and applies to all files under models/example/
     dtm_model:
-      +schema: dbt_analysis
       +materialized: table
     dwh_model:
       +materialized: table
