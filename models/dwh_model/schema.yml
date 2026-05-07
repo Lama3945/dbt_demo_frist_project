@@ -82,6 +82,9 @@ models:
         description: "Payment status"
         data_tests:
           - not_null
+          - at_least_one:
+              arguments:
+                group_by_columns: ['ID_PAYMENT,ID_ORDER']
       - name: MT_PAYMENT
         description: "Payment amount"
         data_tests:

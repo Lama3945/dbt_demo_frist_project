@@ -1,4 +1,4 @@
-{% test _pourcentage_donnes_corrompues(model, column_name,seuil_montant_valide) %}
+{% test pourcentage_donnes_corrompues(model, column_name,seuil_montant_valide) %}
 
 {{ config(severity = 'warn') }}
 

@@ -41,7 +41,7 @@ models:
       - name: MT_TOTAL_PAYMENT
         description: "Customers total amount"
         data_tests:
-          - _pourcentage_donnes_corrompues:
+          - pourcentage_donnes_corrompues:
               arguments:
                 seuil_montant_valide : 1000
                 config:

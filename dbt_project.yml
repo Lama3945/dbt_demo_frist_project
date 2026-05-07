@@ -39,5 +39,7 @@ models:
       +materialized: table
     stg_model:
       +materialized: view
+    statement_model:
+      +materialized: view
     example:
       +enabled: False

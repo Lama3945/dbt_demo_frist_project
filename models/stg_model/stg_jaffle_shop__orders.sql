@@ -11,7 +11,7 @@ select DISTINCT ID         AS ID_ORDER,
                 USER_ID    AS ID_USER,
                 ORDER_DATE AS DT_ORDER,
                 STATUS     AS LB_STATUS
-from {{ source('jaffle_shop', 'orders') }}
+from {{ ref('orders_snapshot_from_src') }}
 
 /*
     Uncomment the line below to remove records with null `id` values
